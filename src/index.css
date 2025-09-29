@@ -8,89 +8,103 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Base colors */
+    --background: 250 250% 98%;
+    --foreground: 220 15% 15%;
+    
+    /* Surface colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 220 15% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --popover-foreground: 220 15% 15%;
+    
+    /* Brand colors */
+    --primary: 250 84% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 250 20% 96%;
+    --secondary-foreground: 220 15% 15%;
+    
+    /* State colors */
+    --muted: 250 10% 95%;
+    --muted-foreground: 220 8% 50%;
+    --accent: 250 50% 94%;
+    --accent-foreground: 220 15% 15%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* UI elements */
+    --border: 250 15% 90%;
+    --input: 250 15% 90%;
+    --ring: 250 84% 60%;
+    --radius: 0.75rem;
+    
+    /* Priority colors */
+    --priority-high: 0 75% 60%;
+    --priority-high-bg: 0 75% 96%;
+    --priority-medium: 35 90% 55%;
+    --priority-medium-bg: 35 90% 96%;
+    --priority-low: 140 65% 50%;
+    --priority-low-bg: 140 65% 96%;
+    
+    /* Task states */
+    --task-completed: 220 8% 70%;
+    --task-completed-bg: 220 8% 95%;
+    
+    /* Progress */
+    --progress-bg: 250 15% 90%;
+    --progress-fill: 250 84% 60%;
+    
+    /* Animations */
+    --animation-fast: 0.15s;
+    --animation-normal: 0.3s;
+    --animation-slow: 0.5s;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Base colors */
+    --background: 220 20% 8%;
+    --foreground: 220 10% 92%;
+    
+    /* Surface colors */
+    --card: 220 20% 10%;
+    --card-foreground: 220 10% 92%;
+    --popover: 220 20% 10%;
+    --popover-foreground: 220 10% 92%;
+    
+    /* Brand colors */
+    --primary: 250 84% 70%;
+    --primary-foreground: 220 20% 8%;
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 220 10% 92%;
+    
+    /* State colors */
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 8% 60%;
+    --accent: 220 15% 15%;
+    --accent-foreground: 220 10% 92%;
+    --destructive: 0 75% 65%;
+    --destructive-foreground: 220 20% 8%;
+    
+    /* UI elements */
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 250 84% 70%;
+    
+    /* Priority colors */
+    --priority-high: 0 75% 65%;
+    --priority-high-bg: 0 30% 15%;
+    --priority-medium: 35 80% 65%;
+    --priority-medium-bg: 35 30% 15%;
+    --priority-low: 140 65% 60%;
+    --priority-low-bg: 140 30% 15%;
+    
+    /* Task states */
+    --task-completed: 220 8% 50%;
+    --task-completed-bg: 220 15% 12%;
+    
+    /* Progress */
+    --progress-bg: 220 15% 18%;
+    --progress-fill: 250 84% 70%;
   }
 }
 
@@ -101,5 +115,121 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Task Priority Styles */
+  .task-priority-high {
+    @apply border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/20;
+  }
+  
+  .task-priority-medium {
+    @apply border-l-4 border-l-yellow-500 bg-yellow-50 dark:bg-yellow-950/20;
+  }
+  
+  .task-priority-low {
+    @apply border-l-4 border-l-green-500 bg-green-50 dark:bg-green-950/20;
+  }
+  
+  /* Task State Styles */
+  .task-completed {
+    @apply opacity-60 line-through;
+  }
+  
+  .task-dragging {
+    @apply rotate-2 scale-105 shadow-xl;
+  }
+  
+  /* Animation Classes */
+  .animate-slide-in {
+    animation: slideIn var(--animation-normal) ease-out;
+  }
+  
+  .animate-slide-out {
+    animation: slideOut var(--animation-normal) ease-in;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn var(--animation-normal) ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn var(--animation-normal) ease-out;
+  }
+}
+
+@layer utilities {
+  .text-priority-high {
+    color: hsl(var(--priority-high));
+  }
+  
+  .text-priority-medium {
+    color: hsl(var(--priority-medium));
+  }
+  
+  .text-priority-low {
+    color: hsl(var(--priority-low));
+  }
+  
+  .bg-priority-high {
+    background-color: hsl(var(--priority-high-bg));
+  }
+  
+  .bg-priority-medium {
+    background-color: hsl(var(--priority-medium-bg));
+  }
+  
+  .bg-priority-low {
+    background-color: hsl(var(--priority-low-bg));
+  }
+}
+
+/* Keyframes */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
