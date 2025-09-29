@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import { TaskInput } from "./TaskInput";
 import { TaskItem } from "./TaskItem";
 import { TaskFilters } from "./TaskFilters";
 import { ProgressBar } from "./ProgressBar";
 import { ThemeToggle } from "./ThemeToggle";
-import { Trash2 } from "lucide-react";
+import { Trash2, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -23,6 +24,7 @@ export type CategoryType = "all" | "work" | "study" | "personal";
 export type PriorityFilter = "all" | "high" | "medium" | "low";
 
 export function TodoApp() {
+  const { user, signOut } = useAuth();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<FilterType>("all");
   const [categoryFilter, setCategoryFilter] = useState<CategoryType>("all");
@@ -132,9 +134,15 @@ export function TodoApp() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-4xl font-bold text-foreground mb-2">My Tasks</h1>
-            <p className="text-muted-foreground">Stay organized and productive</p>
+            <p className="text-muted-foreground">Welcome back, {user?.email}</p>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button variant="outline" onClick={signOut} size="sm">
+              <LogOut className="h-4 w-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
 
         {/* Progress Bar */}
