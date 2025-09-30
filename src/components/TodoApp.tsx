@@ -134,7 +134,7 @@ export function TodoApp() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">My Tasks</h1>
-            <p className="text-sm md:text-base text-muted-foreground truncate max-w-[280px] md:max-w-none">Welcome back, {user?.email}</p>
+            <p className="text-sm md:text-base text-muted-foreground truncate max-w-[280px] md:max-w-none">Welcome back, {user?.user_metadata?.name || user?.email}</p>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
