@@ -11,13 +11,15 @@ import { z } from "zod";
 
 const authSchema = z.object({
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  password: z.string().min(6, "Password must be at least 6 characters").max(100, "Password must be less than 100 characters")
+  password: z.string().min(6, "Password must be at least 6 characters").max(100, "Password must be less than 100 characters"),
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters").optional()
 });
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ const Auth = () => {
 
     try {
       // Validate input
-      const validatedData = authSchema.parse({ email, password });
+      const validatedData = authSchema.parse({ email, password, name: isLogin ? undefined : name });
 
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({
@@ -76,7 +78,10 @@ const Auth = () => {
           email: validatedData.email,
           password: validatedData.password,
           options: {
-            emailRedirectTo: redirectUrl
+            emailRedirectTo: redirectUrl,
+            data: {
+              name: validatedData.name
+            }
           }
         });
 
@@ -138,6 +143,20 @@ const Auth = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            {!isLogin && (
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  disabled={loading}
+                />
+              </div>
+            )}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
