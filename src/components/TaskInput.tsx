@@ -51,7 +51,7 @@ export function TaskInput({ onAddTask }: TaskInputProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-3">
         <Input
           type="text"
           placeholder="Add a new task..."
@@ -59,13 +59,13 @@ export function TaskInput({ onAddTask }: TaskInputProps) {
           onChange={(e) => setText(e.target.value)}
           className="flex-1 text-base"
         />
-        <Button type="submit" className="px-6">
+        <Button type="submit" className="w-full sm:w-auto sm:px-6">
           <Plus className="h-4 w-4 mr-2" />
           Add Task
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {/* Priority */}
         <div className="space-y-2">
           <Label className="text-sm font-medium">Priority</Label>

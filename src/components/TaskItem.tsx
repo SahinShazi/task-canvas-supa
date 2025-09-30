@@ -96,7 +96,7 @@ export function TaskItem({
   return (
     <Card 
       className={cn(
-        "p-4 transition-all duration-200 hover:shadow-md animate-fade-in",
+        "p-3 sm:p-4 transition-all duration-200 hover:shadow-md animate-fade-in",
         task.completed && "opacity-60",
         isDragging && "opacity-50 rotate-2 scale-105 shadow-xl",
         task.priority === "high" && "border-l-4 border-l-red-500",
@@ -109,7 +109,7 @@ export function TaskItem({
       onDragOver={onDragOver}
       onDrop={(e) => onDrop(e, task.id)}
     >
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-2 sm:gap-3">
         {/* Drag Handle */}
         <button className="mt-1 p-1 hover:bg-muted rounded cursor-grab active:cursor-grabbing">
           <GripVertical className="h-4 w-4 text-muted-foreground" />
@@ -134,9 +134,9 @@ export function TaskItem({
                 className="text-base"
                 placeholder="Task description"
               />
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <Select value={editPriority} onValueChange={(value: "high" | "medium" | "low") => setEditPriority(value)}>
-                  <SelectTrigger className="w-32">
+                  <SelectTrigger className="w-full sm:w-32">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -147,7 +147,7 @@ export function TaskItem({
                 </Select>
                 
                 <Select value={editCategory} onValueChange={(value: "work" | "study" | "personal") => setEditCategory(value)}>
-                  <SelectTrigger className="w-32">
+                  <SelectTrigger className="w-full sm:w-32">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -159,7 +159,7 @@ export function TaskItem({
 
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">
                       <CalendarIcon className="h-4 w-4 mr-1" />
                       {editDueDate ? format(editDueDate, "MMM d") : "Date"}
                     </Button>
@@ -213,24 +213,24 @@ export function TaskItem({
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
           {isEditing ? (
             <>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={handleSaveEdit}
-                className="h-8 w-8 p-0 text-green-600 hover:text-green-700"
+                className="h-7 w-7 sm:h-8 sm:w-8 p-0 text-green-600 hover:text-green-700"
               >
-                <Check className="h-4 w-4" />
+                <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={handleCancelEdit}
-                className="h-8 w-8 p-0 text-red-600 hover:text-red-700"
+                className="h-7 w-7 sm:h-8 sm:w-8 p-0 text-red-600 hover:text-red-700"
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
             </>
           ) : (
@@ -239,17 +239,17 @@ export function TaskItem({
                 size="sm"
                 variant="ghost"
                 onClick={() => setIsEditing(true)}
-                className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
+                className="h-7 w-7 sm:h-8 sm:w-8 p-0 text-muted-foreground hover:text-foreground"
               >
-                <Edit className="h-4 w-4" />
+                <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={() => onDelete(task.id)}
-                className="h-8 w-8 p-0 text-muted-foreground hover:text-red-600"
+                className="h-7 w-7 sm:h-8 sm:w-8 p-0 text-muted-foreground hover:text-red-600"
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
             </>
           )}

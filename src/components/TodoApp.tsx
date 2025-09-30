@@ -131,16 +131,16 @@ export function TodoApp() {
     <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">My Tasks</h1>
-            <p className="text-muted-foreground">Welcome back, {user?.email}</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">My Tasks</h1>
+            <p className="text-sm md:text-base text-muted-foreground truncate max-w-[280px] md:max-w-none">Welcome back, {user?.email}</p>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <Button variant="outline" onClick={signOut} size="sm">
-              <LogOut className="h-4 w-4 mr-2" />
-              Sign Out
+              <LogOut className="h-4 w-4 md:mr-2" />
+              <span className="hidden md:inline">Sign Out</span>
             </Button>
           </div>
         </div>
@@ -149,7 +149,7 @@ export function TodoApp() {
         <ProgressBar progress={progress} totalTasks={totalTasks} completedTasks={completedTasks} />
 
         {/* Task Input */}
-        <Card className="p-6 mb-6 animate-fade-in">
+        <Card className="p-4 sm:p-6 mb-6 animate-fade-in">
           <TaskInput onAddTask={addTask} />
         </Card>
 
