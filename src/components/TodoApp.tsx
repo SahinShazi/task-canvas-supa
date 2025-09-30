@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { TaskInput } from "./TaskInput";
 import { TaskItem } from "./TaskItem";
 import { TaskFilters } from "./TaskFilters";
@@ -25,53 +27,181 @@ export type PriorityFilter = "all" | "high" | "medium" | "low";
 
 export function TodoApp() {
   const { user, signOut } = useAuth();
+  const { toast } = useToast();
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterType>("all");
   const [categoryFilter, setCategoryFilter] = useState<CategoryType>("all");
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [draggedTask, setDraggedTask] = useState<string | null>(null);
 
-  // Load tasks from localStorage on component mount
+  // Load tasks from database on component mount
   useEffect(() => {
-    const savedTasks = localStorage.getItem("todoTasks");
-    if (savedTasks) {
-      const parsedTasks = JSON.parse(savedTasks).map((task: any) => ({
-        ...task,
-        createdAt: new Date(task.createdAt),
-        dueDate: task.dueDate ? new Date(task.dueDate) : undefined,
-      }));
-      setTasks(parsedTasks);
-    }
-  }, []);
+    if (!user) return;
 
-  // Save tasks to localStorage whenever tasks change
-  useEffect(() => {
-    localStorage.setItem("todoTasks", JSON.stringify(tasks));
-  }, [tasks]);
+    const fetchTasks = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('tasks')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false });
 
-  const addTask = useCallback((taskData: Omit<Task, "id" | "createdAt">) => {
-    const newTask: Task = {
-      ...taskData,
-      id: crypto.randomUUID(),
-      createdAt: new Date(),
+        if (error) throw error;
+
+        const parsedTasks = (data || []).map((task: any) => ({
+          id: task.id,
+          text: task.text,
+          completed: task.completed,
+          priority: task.priority as "high" | "medium" | "low",
+          category: task.category as "work" | "study" | "personal",
+          dueDate: task.due_date ? new Date(task.due_date) : undefined,
+          createdAt: new Date(task.created_at),
+        }));
+        
+        setTasks(parsedTasks);
+      } catch (error: any) {
+        toast({
+          title: "Error loading tasks",
+          description: error.message,
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
     };
-    setTasks(prev => [newTask, ...prev]);
-  }, []);
 
-  const updateTask = useCallback((id: string, updates: Partial<Task>) => {
-    setTasks(prev => prev.map(task => 
-      task.id === id ? { ...task, ...updates } : task
-    ));
-  }, []);
+    fetchTasks();
+  }, [user, toast]);
 
-  const deleteTask = useCallback((id: string) => {
-    setTasks(prev => prev.filter(task => task.id !== id));
-  }, []);
+  const addTask = useCallback(async (taskData: Omit<Task, "id" | "createdAt">) => {
+    if (!user) return;
 
-  const clearAllTasks = useCallback(() => {
-    setTasks([]);
-  }, []);
+    try {
+      const { data, error } = await supabase
+        .from('tasks')
+        .insert({
+          user_id: user.id,
+          text: taskData.text,
+          completed: taskData.completed,
+          priority: taskData.priority,
+          category: taskData.category,
+          due_date: taskData.dueDate?.toISOString(),
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      const newTask: Task = {
+        id: data.id,
+        text: data.text,
+        completed: data.completed,
+        priority: data.priority as "high" | "medium" | "low",
+        category: data.category as "work" | "study" | "personal",
+        dueDate: data.due_date ? new Date(data.due_date) : undefined,
+        createdAt: new Date(data.created_at),
+      };
+      
+      setTasks(prev => [newTask, ...prev]);
+      
+      toast({
+        title: "Task added",
+        description: "Your task has been created successfully.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error adding task",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  }, [user, toast]);
+
+  const updateTask = useCallback(async (id: string, updates: Partial<Task>) => {
+    if (!user) return;
+
+    try {
+      const updateData: any = {};
+      if (updates.text !== undefined) updateData.text = updates.text;
+      if (updates.completed !== undefined) updateData.completed = updates.completed;
+      if (updates.priority !== undefined) updateData.priority = updates.priority;
+      if (updates.category !== undefined) updateData.category = updates.category;
+      if (updates.dueDate !== undefined) updateData.due_date = updates.dueDate?.toISOString();
+
+      const { error } = await supabase
+        .from('tasks')
+        .update(updateData)
+        .eq('id', id)
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      setTasks(prev => prev.map(task => 
+        task.id === id ? { ...task, ...updates } : task
+      ));
+    } catch (error: any) {
+      toast({
+        title: "Error updating task",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  }, [user, toast]);
+
+  const deleteTask = useCallback(async (id: string) => {
+    if (!user) return;
+
+    try {
+      const { error } = await supabase
+        .from('tasks')
+        .delete()
+        .eq('id', id)
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      setTasks(prev => prev.filter(task => task.id !== id));
+      
+      toast({
+        title: "Task deleted",
+        description: "Your task has been removed.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error deleting task",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  }, [user, toast]);
+
+  const clearAllTasks = useCallback(async () => {
+    if (!user) return;
+
+    try {
+      const { error } = await supabase
+        .from('tasks')
+        .delete()
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      setTasks([]);
+      
+      toast({
+        title: "All tasks cleared",
+        description: "All your tasks have been removed.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error clearing tasks",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  }, [user, toast]);
 
   const toggleTask = useCallback((id: string) => {
     updateTask(id, { completed: !tasks.find(t => t.id === id)?.completed });
@@ -126,6 +256,17 @@ export function TodoApp() {
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter(task => task.completed).length;
   const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading tasks...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
