@@ -273,23 +273,31 @@ export function TodoApp() {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 animate-fade-in">
-          <div>
-            <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent mb-2">
-              My Tasks
-            </h1>
-            <p className="text-sm md:text-base text-muted-foreground truncate max-w-[280px] md:max-w-none">
-              Welcome back, <span className="font-medium text-foreground">{user?.user_metadata?.name || user?.email}</span>
-            </p>
+        <Card className="p-6 mb-8 animate-fade-in backdrop-blur-sm bg-gradient-to-br from-card via-card to-primary/5 border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="space-y-1">
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent tracking-tight">
+                My Tasks
+              </h1>
+              <p className="text-sm md:text-base text-muted-foreground flex items-center gap-2">
+                <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Welcome back, <span className="font-semibold text-foreground">{user?.user_metadata?.name || user?.email}</span>
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <Button 
+                variant="outline" 
+                onClick={signOut} 
+                size="sm" 
+                className="group border-border/60 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
+              >
+                <LogOut className="h-4 w-4 md:mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                <span className="hidden md:inline">Sign Out</span>
+              </Button>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button variant="outline" onClick={signOut} size="sm" className="hover:shadow-md transition-shadow">
-              <LogOut className="h-4 w-4 md:mr-2" />
-              <span className="hidden md:inline">Sign Out</span>
-            </Button>
-          </div>
-        </div>
+        </Card>
 
         {/* Progress Bar */}
         <ProgressBar progress={progress} totalTasks={totalTasks} completedTasks={completedTasks} />
