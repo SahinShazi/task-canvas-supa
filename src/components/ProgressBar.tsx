@@ -38,19 +38,19 @@ export function ProgressBar({ progress, totalTasks, completedTasks }: ProgressBa
         
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
-            <Circle className="h-3 w-3 fill-green-500 text-green-500" />
+            <Circle className="h-3 w-3 fill-priority-low text-priority-low" />
             Completed: {completedTasks}
           </div>
           <div className="flex items-center gap-1">
-            <Circle className="h-3 w-3 fill-yellow-500 text-yellow-500" />
+            <Circle className="h-3 w-3 fill-priority-medium text-priority-medium" />
             Remaining: {totalTasks - completedTasks}
           </div>
         </div>
       </div>
 
       {totalTasks > 0 && completedTasks === totalTasks && (
-        <div className="mt-4 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
-          <div className="flex items-center gap-2 text-green-700 dark:text-green-300">
+        <div className="mt-4 p-3 bg-priority-low-bg rounded-lg border border-priority-low/20">
+          <div className="flex items-center gap-2 text-priority-low">
             <CheckCircle className="h-4 w-4" />
             <span className="text-sm font-medium">All tasks completed! 🎉</span>
           </div>

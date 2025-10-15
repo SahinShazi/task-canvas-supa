@@ -73,22 +73,22 @@ export function TaskInput({ onAddTask }: TaskInputProps) {
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-popover z-50">
               <SelectItem value="high">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-priority-high" />
                   High
                 </div>
               </SelectItem>
               <SelectItem value="medium">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-priority-medium" />
                   Medium
                 </div>
               </SelectItem>
               <SelectItem value="low">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <div className="w-3 h-3 rounded-full bg-priority-low" />
                   Low
                 </div>
               </SelectItem>
@@ -103,7 +103,7 @@ export function TaskInput({ onAddTask }: TaskInputProps) {
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-popover z-50">
               <SelectItem value="work">💼 Work</SelectItem>
               <SelectItem value="study">📚 Study</SelectItem>
               <SelectItem value="personal">🏠 Personal</SelectItem>
@@ -127,7 +127,7 @@ export function TaskInput({ onAddTask }: TaskInputProps) {
                 {dueDate ? format(dueDate, "PPP") : "Pick a date"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 bg-popover z-50" align="start">
               <Calendar
                 mode="single"
                 selected={dueDate}
