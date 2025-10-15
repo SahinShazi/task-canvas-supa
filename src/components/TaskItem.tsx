@@ -69,10 +69,10 @@ export function TaskItem({
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-priority-high text-white";
-      case "medium": return "bg-priority-medium text-white";
-      case "low": return "bg-priority-low text-white";
-      default: return "bg-muted text-muted-foreground";
+      case "high": return "bg-red-500 text-white";
+      case "medium": return "bg-yellow-500 text-white";
+      case "low": return "bg-green-500 text-white";
+      default: return "bg-gray-500 text-white";
     }
   };
 
@@ -99,9 +99,9 @@ export function TaskItem({
         "p-3 sm:p-4 transition-all duration-200 hover:shadow-lg shadow-sm animate-fade-in border-primary/10",
         task.completed && "opacity-60 bg-muted/30",
         isDragging && "opacity-50 rotate-2 scale-105 shadow-xl",
-        task.priority === "high" && "border-l-4 border-l-priority-high",
-        task.priority === "medium" && "border-l-4 border-l-priority-medium",
-        task.priority === "low" && "border-l-4 border-l-priority-low"
+        task.priority === "high" && "border-l-4 border-l-red-500 hover:border-l-red-600",
+        task.priority === "medium" && "border-l-4 border-l-yellow-500 hover:border-l-yellow-600",
+        task.priority === "low" && "border-l-4 border-l-green-500 hover:border-l-green-600"
       )}
       draggable={!isEditing}
       onDragStart={() => onDragStart(task.id)}
@@ -139,7 +139,7 @@ export function TaskItem({
                   <SelectTrigger className="w-full sm:w-32">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
+                  <SelectContent>
                     <SelectItem value="high">High</SelectItem>
                     <SelectItem value="medium">Medium</SelectItem>
                     <SelectItem value="low">Low</SelectItem>
@@ -150,7 +150,7 @@ export function TaskItem({
                   <SelectTrigger className="w-full sm:w-32">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
+                  <SelectContent>
                     <SelectItem value="work">💼 Work</SelectItem>
                     <SelectItem value="study">📚 Study</SelectItem>
                     <SelectItem value="personal">🏠 Personal</SelectItem>
@@ -164,7 +164,7 @@ export function TaskItem({
                       {editDueDate ? format(editDueDate, "MMM d") : "Date"}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-popover z-50">
+                  <PopoverContent className="w-auto p-0">
                     <Calendar
                       mode="single"
                       selected={editDueDate}
