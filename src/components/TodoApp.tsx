@@ -270,17 +270,21 @@ export function TodoApp() {
 
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 animate-fade-in">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">My Tasks</h1>
-            <p className="text-sm md:text-base text-muted-foreground truncate max-w-[280px] md:max-w-none">Welcome back, {user?.user_metadata?.name || user?.email}</p>
+            <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent mb-2">
+              My Tasks
+            </h1>
+            <p className="text-sm md:text-base text-muted-foreground truncate max-w-[280px] md:max-w-none">
+              Welcome back, <span className="font-medium text-foreground">{user?.user_metadata?.name || user?.email}</span>
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Button variant="outline" onClick={signOut} size="sm">
+            <Button variant="outline" onClick={signOut} size="sm" className="hover:shadow-md transition-shadow">
               <LogOut className="h-4 w-4 md:mr-2" />
               <span className="hidden md:inline">Sign Out</span>
             </Button>
@@ -291,7 +295,7 @@ export function TodoApp() {
         <ProgressBar progress={progress} totalTasks={totalTasks} completedTasks={completedTasks} />
 
         {/* Task Input */}
-        <Card className="p-4 sm:p-6 mb-6 animate-fade-in">
+        <Card className="p-4 sm:p-6 mb-6 animate-fade-in shadow-md hover:shadow-lg transition-all border-primary/10">
           <TaskInput onAddTask={addTask} />
         </Card>
 
@@ -312,7 +316,7 @@ export function TodoApp() {
         {/* Task List */}
         <div className="space-y-3">
           {filteredTasks.length === 0 ? (
-            <Card className="p-8 text-center">
+            <Card className="p-8 text-center shadow-md border-primary/10">
               <p className="text-muted-foreground text-lg">
                 {tasks.length === 0 
                   ? "No tasks yet. Add one above to get started!" 
@@ -343,7 +347,7 @@ export function TodoApp() {
             <Button
               variant="outline"
               onClick={clearAllTasks}
-              className="text-destructive hover:text-destructive-foreground hover:bg-destructive"
+              className="text-destructive hover:text-destructive-foreground hover:bg-destructive hover:shadow-md transition-all"
             >
               <Trash2 className="mr-2 h-4 w-4" />
               Clear All Tasks

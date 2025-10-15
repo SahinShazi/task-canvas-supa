@@ -96,12 +96,12 @@ export function TaskItem({
   return (
     <Card 
       className={cn(
-        "p-3 sm:p-4 transition-all duration-200 hover:shadow-md animate-fade-in",
-        task.completed && "opacity-60",
+        "p-3 sm:p-4 transition-all duration-200 hover:shadow-lg shadow-sm animate-fade-in border-primary/10",
+        task.completed && "opacity-60 bg-muted/30",
         isDragging && "opacity-50 rotate-2 scale-105 shadow-xl",
-        task.priority === "high" && "border-l-4 border-l-red-500",
-        task.priority === "medium" && "border-l-4 border-l-yellow-500",
-        task.priority === "low" && "border-l-4 border-l-green-500"
+        task.priority === "high" && "border-l-4 border-l-red-500 hover:border-l-red-600",
+        task.priority === "medium" && "border-l-4 border-l-yellow-500 hover:border-l-yellow-600",
+        task.priority === "low" && "border-l-4 border-l-green-500 hover:border-l-green-600"
       )}
       draggable={!isEditing}
       onDragStart={() => onDragStart(task.id)}

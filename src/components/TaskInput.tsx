@@ -57,9 +57,9 @@ export function TaskInput({ onAddTask }: TaskInputProps) {
           placeholder="Add a new task..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="flex-1 text-base"
+          className="flex-1 text-base focus:shadow-sm transition-shadow"
         />
-        <Button type="submit" className="w-full sm:w-auto sm:px-6">
+        <Button type="submit" className="w-full sm:w-auto sm:px-6 shadow-sm hover:shadow-md">
           <Plus className="h-4 w-4 mr-2" />
           Add Task
         </Button>

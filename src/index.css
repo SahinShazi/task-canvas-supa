@@ -9,7 +9,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Base colors */
-    --background: 250 250% 98%;
+    --background: 250 50% 98%;
     --foreground: 220 15% 15%;
     
     /* Surface colors */
@@ -21,6 +21,7 @@ All colors MUST be HSL.
     /* Brand colors */
     --primary: 250 84% 60%;
     --primary-foreground: 0 0% 100%;
+    --primary-glow: 250 100% 85%;
     --secondary: 250 20% 96%;
     --secondary-foreground: 220 15% 15%;
     
@@ -37,6 +38,17 @@ All colors MUST be HSL.
     --input: 250 15% 90%;
     --ring: 250 84% 60%;
     --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(250 84% 60%) 0%, hsl(280 84% 65%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(250 50% 98%) 0%, hsl(250 50% 96%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(250 50% 99%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(250 84% 60% / 0.08);
+    --shadow-md: 0 4px 16px -4px hsl(250 84% 60% / 0.12);
+    --shadow-lg: 0 8px 32px -8px hsl(250 84% 60% / 0.16);
+    --shadow-glow: 0 0 24px hsl(250 100% 85% / 0.3);
     
     /* Priority colors */
     --priority-high: 0 75% 60%;
@@ -74,6 +86,7 @@ All colors MUST be HSL.
     /* Brand colors */
     --primary: 250 84% 70%;
     --primary-foreground: 220 20% 8%;
+    --primary-glow: 250 100% 75%;
     --secondary: 220 15% 15%;
     --secondary-foreground: 220 10% 92%;
     
@@ -89,6 +102,17 @@ All colors MUST be HSL.
     --border: 220 15% 18%;
     --input: 220 15% 18%;
     --ring: 250 84% 70%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(250 84% 70%) 0%, hsl(280 84% 75%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(220 20% 8%) 0%, hsl(220 20% 10%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(220 20% 10%) 0%, hsl(220 20% 12%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 8px 32px -8px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 24px hsl(250 100% 75% / 0.2);
     
     /* Priority colors */
     --priority-high: 0 75% 65%;

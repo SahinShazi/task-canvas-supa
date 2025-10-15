@@ -10,7 +10,7 @@ interface ProgressBarProps {
 
 export function ProgressBar({ progress, totalTasks, completedTasks }: ProgressBarProps) {
   return (
-    <Card className="p-6 mb-6 bg-gradient-to-r from-primary/5 to-accent/5">
+    <Card className="p-6 mb-6 bg-gradient-to-r from-primary/5 to-accent/5 shadow-md border-primary/10 animate-fade-in">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
